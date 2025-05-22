@@ -2,7 +2,7 @@ const axios = require('axios');
 
 exports.handler = async function(event) {
   const token = process.env.GITHUB_TOKEN;
-  const repo = "your-username/your-repo"; // Change this
+  const repo = "lgaylord18/personal_dictionary"; 
   const filePath = "dictionary.json";
   const newEntry = JSON.parse(event.body);
 

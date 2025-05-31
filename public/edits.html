@@ -42,8 +42,8 @@
                     <div class="inner-nav desktop-nav">
                         <ul class="clearlist scroll-nav local-scroll">
                             <li><a href="index.html">Home</a></li>
-                            <li class="active"><a href="alphaview.html">View</a></li>
-                            <li><a href="edits.html">Edit</a></li>
+                            <li><a href="view.html">View</a></li>
+                            <li class="active"><a href="edits.html">Edit</a></li>
                         </ul>
                     </div>
                     <!-- End Main Menu -->
@@ -81,48 +81,48 @@
                             <div class="row">
                                 <div class="col-md-4 col-md-offset-4">
                                     
-                                    <form class="form contact-form" id="contact_form">
+                                    <form class="form contact-form" id="word_add_form">
                                         <div class="clearfix">
                                             
-                                            <!-- Username -->
+                                            <!-- Word -->
                                             <div class="form-group">
-                                                <input type="text" name="username" id="username" class="input-md round form-control" placeholder="Username" pattern=".{3,100}" required>
+                                                <input type="text" id="add_word" class="input-md round form-control" placeholder="Word" pattern=".{3,100}" required>
                                             </div>
+
+                                            <!-- Type -->
+                                            <div class="form-group">
+                                                <input type="text" id="add_type" class="input-md round form-control" placeholder="Type" pattern=".{3,100}" required>
+                                            </div>
+
                                             
-                                            <!-- Password -->
+                                            <!-- Definition -->
                                             <div class="form-group">
-                                                <input type="password" name="password" id="password" class="input-md round form-control" placeholder="Password" pattern=".{5,100}" required>
-                                            </div>
-                                                
+                                                <input type="text" id="add_definition" class="input-md round form-control" placeholder="Definition" pattern=".{5,100}" required>
+                                            </div> 
                                         </div>
                                         
-                                        <div class="clearfix">
-                                            
-                                            <div class="cf-left-col">
-                                                
-                                                <!-- Inform Tip -->                                        
-                                                <div class="form-tip pt-20">
-                                                    <a href="">Forgot Password?</a>
-                                                </div>
-                                                
-                                            </div>
-                                            
-                                            <div class="cf-right-col">
-                                                
-                                                <!-- Send Button -->
-                                                <div class="align-right pt-10">
-                                                    <button class="submit_btn btn btn-mod btn-medium btn-round" id="login-btn">Login</button>
-                                                </div>
-                                                
-                                            </div>
-                                            
+                                        <div class="pt-10">
+                                            <button class="submit_btn btn btn-mod btn-medium btn-round btn-full" id="reg-btn">Add</button>
                                         </div>
-                                        
                                     </form>
-                                    
+                                    <script>
+                                        document.getElementById('word_add_form').addEventListener('submit', async (e) => {
+                                                e.preventDefault();
+                                                const add_word = document.getElementById('add_word').value;
+                                                const add_type = document.getElementById('add_type').value;
+                                                const add_ definition = document.getElementById('add_definition').value;
+                                                const add_res = await fetch('/.netlify/functions/add_to_dictionary', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ word, definition })
+                                            });
+                                        const add_data = await add_res.json();
+                                        alert(add_data.message || add_data.error);
+                                    });
+                                    </script>
                                 </div>
                             </div>
-                            <!-- End Login Form -->
+                            <!-- End Add Form -->
                             
                         </div>
                         
@@ -132,46 +132,58 @@
                             <div class="row">
                                 <div class="col-md-4 col-md-offset-4">
                                     
-                                    <form class="form contact-form" id="contact_form">
+                                    <form class="form contact-form" id="word_condense_form">
                                         <div class="clearfix">
                                             
                                             <!-- Email -->
                                             <div class="form-group">
-                                                <input type="text" name="Email" id="Email" class="input-md round form-control" placeholder="Email" pattern=".{3,100}" required>
+                                                <input type="text" id="cond_word_1" class="input-md round form-control" placeholder="Word" pattern=".{3,100}" required>
                                             </div>
                                             
                                             <!-- Username -->
                                             <div class="form-group">
-                                                <input type="text" name="username" id="username" class="input-md round form-control" placeholder="Username" pattern=".{3,100}" required>
+                                                <input type="text" id="cond_word_2" class="input-md round form-control" placeholder="Word" pattern=".{3,100}" required>
                                             </div>
                                             
                                             <!-- Password -->
                                             <div class="form-group">
-                                                <input type="password" name="password" id="password" class="input-md round form-control" placeholder="Password" pattern=".{5,100}" required>
+                                                <input type="text" id="cond_type" class="input-md round form-control" placeholder="Type" pattern=".{5,100}" required>
                                             </div>
                                             
                                             <!-- Re-enter Password -->
                                             <div class="form-group">
-                                                <input type="password" name="re-password" id="re-password" class="input-md round form-control" placeholder="Re-enter Password" pattern=".{5,100}" required>
+                                                <input type="text" id="cond_definition" class="input-md round form-control" placeholder="Definition" pattern=".{5,100}" required>
                                             </div>
                                                 
                                         </div>
                                         
                                         <!-- Send Button -->
                                         <div class="pt-10">
-                                            <button class="submit_btn btn btn-mod btn-medium btn-round btn-full" id="reg-btn">Register</button>
+                                            <button class="submit_btn btn btn-mod btn-medium btn-round btn-full" id="reg-btn">Condense</button>
                                         </div>
                                         
                                     </form>
-                                    
+                                    <script>
+                                        document.getElementById('word_condense_form').addEventListener('submit', async (e) => {
+                                                e.preventDefault();
+                                                const cond_word_1 = document.getElementById('cond_word_1').value;
+                                                const cond_word_2 = document.getElementById('cond_word_2').value;
+                                                const cond_ype = document.getElementById('cond_type').value;
+                                                const cond_definition = document.getElementById('cond_definition').value;
+                                                const cond_res = await fetch('/.netlify/functions/condense_in_dictionary', {
+                                                method: 'POST',
+                                                headers: { 'Content-Type': 'application/json' },
+                                                body: JSON.stringify({ word, definition })
+                                            });
+                                        const cond_data = await cond_res.json();
+                                        alert(cond_data.message || cond_data.error);
+                                    });
+                                    </script>
                                 </div>
                             </div>
                             <!-- End Registry Form -->
-                            
                         </div>
-                        
-                    </div>
-                    
+                    </div>     
                 </div>
             </section>
             <!-- End Section -->
